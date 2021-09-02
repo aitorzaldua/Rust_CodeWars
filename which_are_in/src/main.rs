@@ -15,15 +15,25 @@ returns [] */
 
 fn main() {
 
-    
-    let mut a2 = vec!["lively", "alive", "harp", "sharp", "alive", "armstrong"];
+
+    let arr_a = ["arp", "live", "strong"];
+    let arr_b = vec!["lively", "alive", "harp", "sharp", "armstrong"];
+
+    let result = in_array(&arr_a, &arr_b);
+
+    println!("{:?}", result);
 
 
-        a2.sort();
-        println!("{:?}", a2);
-        a2.dedup();
-        println!("{:?}", a2);
 
+}
 
-
+fn in_array(arr_a: &[&str], arr_b: &[&str]) -> Vec<String> {
+    let mut r = arr_a
+        .into_iter()
+        .filter(|&s| arr_b.iter().any(|&bs| bs.contains(s)))
+        .map(|s| s.to_string())
+        .collect::<Vec<String>>();
+    r.sort();
+    r.dedup();
+    r
 }

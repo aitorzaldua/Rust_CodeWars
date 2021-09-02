@@ -9,42 +9,38 @@ solution("abcdefg") // should return ["ab", "cd", "ef", "g_"]
 
 fn main() {
 
-    let mut s = String::from("abcdefg");
+    let s = String::from("abcdefg");
+    let z = String::from("Hello_world");
 
-    if s.len() % 2 != 0 {
-        s.push_str("_");
-    }
+    let result_01 = solution_1(&s);
+    let result_02 = solution_2(&z);
 
-    let temp_string = String::new();
+    println!("{:?}", result_01);
+    println!("{:?}", result_02);
 
-    fn working (s: String, mut temp_string: String) -> Vec<String>{
-        let mut output: Vec<String> = vec![];
-        for i in s.chars(){
-            if temp_string.len() != 2 {
-                temp_string.push(i);
 
+}
+
+fn solution_1(s: &str) -> Vec<String> {
+    s.chars()
+        .collect::<Vec<_>>()
+        .chunks(3)
+        .map(|v| {
+            if v.len() < 3 {
+                format!("{}_", v[0])
+            } else {
+                v.into_iter().collect()
             }
-            else {
-                output.push(temp_string.to_string());
-                temp_string.clear();
-                temp_string.push(i);
-            }
-        }
-        
-        output.push(temp_string.to_string());
+        })
+        .collect()
+}
 
-        output
-
-    }
-
-    let mut result = working(s, temp_string);
-
-    if result[0] == "" {
-        result = vec![];
-    }
-
-    println!("{:?}", result);
-
-
+fn solution_2(s: &str) -> Vec<String> {
+    s.chars()
+        //.chain(std::iter::once(' _'))
+        .collect::<Vec<_>>()
+        .chunks_exact(3)
+        .map(|chunk| chunk.iter().collect())
+        .collect()
 }
 
