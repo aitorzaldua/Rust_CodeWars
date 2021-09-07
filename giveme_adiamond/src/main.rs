@@ -25,56 +25,24 @@ A size 5 diamond:
 
 
 fn main() {
-let result = print(5);
-
-println!("{:?}", result);
+    let n = 5;
+    let x = (1..=10)
+        .collect::<Vec<i32>>();
+    println!("{:?}", x);
 }
 
 
 fn print(n: i32) -> Option<String> {
-    if n % 2 == 0 || n <= 0 {
-        None
-    }
-    else {
-        let mut diamond = String::new();
-        let mut diamond_temp = String::new();
-        let mut space_str = String::new();
-
-        for x in 1 .. n+1 {
-            if x % 2 != 0 {
-                let diamond_vec = vec!["*"; x as usize];
-                diamond = diamond_vec
-                .into_iter()
-                .collect();
-                let formula = (n - x) / 2;
-                let space_vec = vec![" "; formula as usize];
-                space_str = space_vec
-                .into_iter()
-                .collect();
-                diamond_temp.push_str(&space_str);
-                diamond_temp.push_str(&diamond);
-                diamond_temp.push_str("\n");
-            }
-
-        }
-
-        for x in (1 .. n-1).rev()  {
-            if x % 2 != 0 {
-                let diamond_vec = vec!["*"; x as usize];
-                diamond = diamond_vec
-                .into_iter()
-                .collect();
-                let formula = (n - x) / 2;
-                let space_vec = vec![" "; formula as usize];
-                space_str = space_vec
-                .into_iter()
-                .collect();
-                diamond_temp.push_str(&space_str); 
-                diamond_temp.push_str(&diamond);
-                diamond_temp.push_str("\n");
-            }
-    }
-    Some (diamond_temp.to_string())
+    if n < 0 || n % 2 == 0 {
+        return None;
     }
 
+    let n = n as usize;
+    let diamond = (1..=n)
+        .chain((1..n).rev())
+        .step_by(2)
+        .map(|i| format!("{}{}\n", " ".repeat((n - i) / 2), "*".repeat(i)))
+        .collect();
+
+    Some(diamond)
 }
