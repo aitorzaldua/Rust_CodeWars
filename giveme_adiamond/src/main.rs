@@ -25,10 +25,22 @@ A size 5 diamond:
 
 
 fn main() {
-    let n = 5;
-    let x = (1..=10)
-        .collect::<Vec<i32>>();
-    println!("{:?}", x);
+
+    let result = print(7);
+
+    println!("{:?}", result);
+
+    let new = String::from("hello").repeat(5);
+
+    println!("{}", new);
+
+    let my_vec = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    let new_vec = my_vec.into_iter().skip(3).take(4).collect::<Vec<i32>>();
+
+    println!("{:?}", new_vec);
+
+
 }
 
 
