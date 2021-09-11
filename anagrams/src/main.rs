@@ -15,23 +15,36 @@ anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']) => ['carer', '
 
 anagrams('laser', ['lazing', 'lazy',  'lacer']) => [] */
 
+
 fn main() {
 
     let input1 ="abba";
-    let input2 = ["aabb".to_string(), "abcd".to_string(), "bbaa".to_string(), "dada".to_string()];
+    let input2 = ["baba".to_string(), "abcd".to_string(), "baab".to_string(), "cccc".to_string()];
 
     let result = anagrams(input1, &input2);
 
     println!("{:?}", result);
 
 
-
-
 }
 
 fn anagrams(word: &str, words: &[String]) -> Vec<String> {
 
-    println!("{} - {:?}", word, words);
+    let word_arr: Vec<char> = word.chars().collect();
+
+    for i in words {
+        for n in &word_arr {
+            let s = i.contains(*n);
+            if s {
+                *i = str::replace(&i, *n, "");
+            }
+
+            println!("{} in  {}? => {}", n, i, s);
+         }
+
+    }
+
+
 
     let end = vec!["hello".to_string(), "world".to_string()];
 

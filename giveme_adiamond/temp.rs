@@ -11,15 +11,14 @@
     let x = (1..=n)
         .chain((1..n).rev())
         .step_by(2)
-        .map(|i| format!("{}{}\n", " ".repeat((n - i) / 2), "*".repeat(i)))
+        .map(|i| format!("{}{}", " ".repeat((n - i) / 2), "Hello".repeat(i)))
         .collect::<String>();
 
 
         let n = 20;
-    let x = (1..=n)
+        let x = (1..=n)
         .chain((1..n).rev())
         .step_by(2)
-        
         .collect::<Vec<i32>>();
     println!("{:?}", x);
 
